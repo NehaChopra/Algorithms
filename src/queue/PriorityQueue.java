@@ -1,0 +1,6 @@
+package queue;
+
+class PriorityQueue {
+
+
+}
