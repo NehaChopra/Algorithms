@@ -1,6 +1,0 @@
-package queue;
-
-class PriorityQueue {
-
-
-}
