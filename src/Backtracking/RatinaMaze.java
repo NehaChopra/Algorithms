@@ -1,0 +1,5 @@
+package Backtracking;
+
+class RatinaMaze {
+
+}
