@@ -1,4 +1,13 @@
-
+/*
+ *  This class would determine single element of the grid.
+ *  For Instance Grid 2 * 2, A1 Row A and Column 1 would represent a single location of a grid.
+ *  
+ *  Location would contain the information whether part of a ship or whole ship is placed.
+ *  Will also contain the information whether the location is hit / missed / partially hit point
+ *  If location is hit = 1
+ *  If location is missed = 0
+ *  If location already estimated  = 10
+ */
 class Location implements Constants{
 	private ShipPiece typeOfShipPiece;
 	private int currentStatus;

@@ -1,3 +1,6 @@
+/*
+ * Ship contains ship related data, type of ship, row and col of ship, vertically or horizontal aligned ship.
+ */
 import java.util.ArrayList;
 import java.util.Iterator;
 

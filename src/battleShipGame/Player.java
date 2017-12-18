@@ -1,3 +1,7 @@
+/*
+ *Player contains details of ships available, missiles available, points he scored, his battle area and opp battle area.
+ */
+
 import java.util.LinkedList;
 import java.util.Queue;
 

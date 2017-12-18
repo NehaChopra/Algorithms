@@ -1,3 +1,6 @@
+/*
+ * BattleArea contains the location and details of the location whether location is hit or not.
+ */
 
 class BattleArea implements Constants{
 	private Location[][] location;
