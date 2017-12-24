@@ -10,6 +10,7 @@ class NQueenProblem {
 		int testCases = input.nextInt();
 		for(int index=0; index<testCases; index++){
 			num = input.nextInt();
+			System.out.println();
 			nQueenProblem();
 		}
 	}
@@ -22,12 +23,19 @@ class NQueenProblem {
 	public static void printBoard(boolean[][] board){
 		for(int index=0;index<num;index++){
 			for(int jindex=0;jindex<num;jindex++){
-				System.out.print(board[index][jindex] + "  ");
+				if(board[index][jindex]){
+					System.out.print("Q" + "  ");					
+				}else{
+					System.out.print("1" + "  ");	
+				}
 			}
 			System.out.println();
 		}
 	}
 	public static boolean DFSUtil(int col, boolean[][] board){
+		if(col>=num){
+			return true;
+		}
 		for(int rowIndex=0; rowIndex<num; rowIndex++){
 			if(isSafe(rowIndex, col, board)){
 				board[rowIndex][col] = true;
@@ -35,27 +43,31 @@ class NQueenProblem {
 					return true;
 				}
 				board[rowIndex][col] = false;
-				return false;
 			}
 		}
 		return false;
 	}
 	public static boolean isSafe(int row, int col, boolean[][] board){
 		for(int colIndex=0; colIndex<col; colIndex++){
-			if(board[row][colIndex] != true){
-				return true;
+			if(board[row][colIndex] != false){
+				return false;
 			}
 		}
-		for(int rowIndex=row-1; rowIndex>0; rowIndex--){
-			if(board[rowIndex][col-1] != true){
-				return true;
+		for(int rowIndex=row-1, colIndex=col-1; 
+				rowIndex>=0 && colIndex>=0; 
+				rowIndex--,colIndex--
+			){
+				if(board[rowIndex][colIndex] != false){
+					return false;
+				}
+		}
+		for(int rowIndex=row+1, colIndex=col-1; 
+				rowIndex<num && colIndex>=0; 
+				rowIndex++, colIndex--){
+			if(board[rowIndex][colIndex] != false){
+				return false;
 			}
 		}
-		for(int rowIndex=row; rowIndex<num; rowIndex++){
-			if(board[rowIndex][col-1] != true){
-				return true;
-			}
-		}
-		return false;
+		return true;
 	}
 }
