@@ -1,4 +1,8 @@
 //https://practice.geeksforgeeks.org/problems/segregate-even-and-odd-numbers/0
+/*
+ * 
+ * need to work on it for geeks for geeks
+ */
 package paytm;
 
 import java.util.Scanner;
