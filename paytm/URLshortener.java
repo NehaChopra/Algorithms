@@ -30,9 +30,9 @@ class URLshortener {
 			if(shortUrl.charAt(index) >='a' && shortUrl.charAt(index) <='z'){
 				result = ((result * characSet.length()) + (shortUrl.charAt(index) - 'a'));
 			}else if(shortUrl.charAt(index) >='A' && shortUrl.charAt(index) <='Z'){
-				result = ((result * characSet.length()) + (shortUrl.charAt(index) - 'A'));
-			}else if(shortUrl.charAt(index) >='1' && shortUrl.charAt(index) <='9'){
-				result = ((result * characSet.length()) + (shortUrl.charAt(index) - '1'));
+				result = ((result * characSet.length()) + (shortUrl.charAt(index) - 'A') + 26);
+			}else if(shortUrl.charAt(index) >='0' && shortUrl.charAt(index) <='9'){
+				result = ((result * characSet.length()) + (shortUrl.charAt(index) - '0') + 52);
 			}
 		}
 		return result;
