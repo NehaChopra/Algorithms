@@ -1,0 +1,6 @@
+package JavaPractice;
+
+class EqualsAndHashCodeContract {
+
+
+}

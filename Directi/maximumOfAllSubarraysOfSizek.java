@@ -16,7 +16,27 @@ class maximumOfAllSubarraysOfSizek {
 			}
 		}
 	}
-	public static void printMaxOfSubArray(){
-		
+	public static void printMaxOfSubArray(int arrayLength, int[] inputArray, int subArrayLength){
+		int[] subArrayInputArray = new int[subArrayLength];
+		for(int index=0; index<subArrayLength; index++){
+			subArrayInputArray[index] = inputArray[index];
+		}
+		for(int index=subArrayLength;index<arrayLength;index++){
+			System.out.println(findTheLargestInSubArray(subArrayInputArray,subArrayLength));
+			subArrayInputArray[0] = inputArray[index];
+		}
+	}
+	public static int findTheLargestInSubArray(int[] subArrayInputArray,int subArrayLength){
+		for(int index=subArrayLength-1;index>0;index--){
+			
+		}
+		for(int index=subArrayLength-1;index>0;index--){
+			swap()
+			heapify();
+		}
+		return subArrayInputArray[0];
+	}
+	public static void heapify(){
+		int 
 	}
 }
