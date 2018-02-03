@@ -7,7 +7,7 @@ class EnemyShipFactory{
 		}else if(type.equals("RocketEnemyShip")){
 			return new UFOEnemyShip("RocketEnemyShip", 10.00);
 		}else if(type.equals("BigUFOEnemyShip")){
-			return new UFOEnemyShip("BigUFOEnemyShip", 40.00);
+			return new BigUFOEnemyShip("BigUFOEnemyShip", 40.00);
 		}else{
 			return null;
 		}
