@@ -7,23 +7,25 @@ class RearrangePositiveAndNegativeNumbers {
 	public static void main(String []args){
 		Scanner input = new Scanner(System.in);
 		int testCases = input.nextInt();
-		int arrayLength = input.nextInt();
-		int array[] = new int[arrayLength];
-		for(int index=0; index<arrayLength; index++){
-			array[index] = input.nextInt();
-		}
-		int negIndex = arrangeElements(array);
-		int negIteration = negIndex;
-		for(int index=0; index<arrayLength; index++){
-			if(array[index] >= 0){
-				System.out.print(array[index] + " ");
+		for(int test = 0; test<testCases; test++){
+			int arrayLength = input.nextInt();
+			int array[] = new int[arrayLength];
+			for(int index=0; index<arrayLength; index++){
+				array[index] = input.nextInt();
 			}
-			if(negIndex<arrayLength){
-				System.out.print(array[negIndex] + " ");
-				negIndex ++;
+			int negIndex = arrangeElements(array);
+			int negIteration = negIndex;
+			for(int index=0; index<arrayLength; index++){
+				if(array[index] >= 0){
+					System.out.print(array[index] + " ");
+				}
+				if(negIndex<arrayLength){
+					System.out.print(array[negIndex] + " ");
+					negIndex ++;
+				}
 			}
+			System.out.println();
 		}
-		System.out.println();
 	}
 	public static int arrangeElements(int array[]){
 		int index=-1;
