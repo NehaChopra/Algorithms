@@ -88,6 +88,9 @@ class AutoComplete {
 	 	obj.insert("helps");
 	 	obj.insert("helping");
 	 	
+	 	obj.printAutoSuggestList("h");
+	 	
+	 	System.out.println("==========================================================");
 	 	obj.printAutoSuggestList("hel");
 	}
 }

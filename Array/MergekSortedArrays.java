@@ -1,6 +1,7 @@
 //https://practice.geeksforgeeks.org/problems/merge-k-sorted-arrays/1
 package Array;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class MergekSortedArrays {
@@ -16,7 +17,8 @@ class MergekSortedArrays {
 		}
 		mergeKArrays(array, k*n);
 	}
-	public static void mergeKArrays(int[][] arrays,int k) {
+	public static ArrayList<Integer>  mergeKArrays(int[][] arrays,int k) {
+		ArrayList<Integer> finalArray = new ArrayList<Integer>();
 		int mergedArray[] = new int[k];
 		int outerArrayIndex=0;
 		while(outerArrayIndex < k) {
@@ -27,7 +29,13 @@ class MergekSortedArrays {
 				}
 			}
 		}
-		heapify(mergedArray, k);
+		heapify(mergedArray, mergedArray.length);
+		
+		for(int index=0; index<mergedArray.length; index++){
+		    finalArray.add(mergedArray[index]);
+		}
+		
+		return finalArray;
 	}
 	public static void heapify(int array[], int length) {
 		for(int index=length-1/2; index>=0; index--) {
