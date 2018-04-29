@@ -1,6 +1,8 @@
 //https://practice.geeksforgeeks.org/problems/phone-directory/0
 package trie;
 
+import java.util.Scanner;
+
 class TrieNode{
 	boolean endOfWord;
 	TrieNode[] children = new TrieNode[26];
@@ -47,11 +49,12 @@ class Trie{
 			if(crawler.children[elementIndex] != null) {
 				crawler = crawler.children[elementIndex]; 
 			}else {
+				System.out.print("0");
 				return;
 			}
 		}
 		if(crawler!=null && lastNode(crawler)) {
-			System.out.println(key);
+			System.out.print(key + " ");
 		}else if(!lastNode(crawler)) {
 			printSuggestedWords(crawler, key);
 		}
@@ -67,7 +70,7 @@ class Trie{
 	}
 	public void printSuggestedWords(TrieNode root, String key) {
 		if(root.endOfWord) {
-			System.out.println(key);
+				System.out.print(key + " ");
 		}
 		if(lastNode(root)) {
 			return;
@@ -81,13 +84,24 @@ class Trie{
 }
 class Phonedirectory {
 	public static void main(String []args) {
-		TrieNode root = new TrieNode();
-		Trie obj = new Trie();
-		obj.root = root;
-	 	obj.insert("geeikistest");
-	 	obj.insert("geeksforgeeks");
-	 	obj.insert("geeksfortest");
-	 	
-	 	obj.autoSuggest("geeips");
+		Scanner input = new Scanner(System.in);
+		int testCases = input.nextInt();
+		for(int index=0; index<testCases; index++) {
+			TrieNode root = new TrieNode();
+			Trie obj = new Trie();
+			obj.root = root;
+			int arrayLength = input.nextInt();
+			for(int jindex=0; jindex<arrayLength; jindex++) {
+				obj.insert(input.next());
+			}
+			
+		 	String inputString = input.next();
+		 	StringBuffer str = new StringBuffer();
+		 	for(int mindex=0; mindex<inputString.length(); mindex++) {
+		 		str.append(inputString.charAt(mindex));
+		 		obj.autoSuggest(str.toString());
+		 		System.out.println();
+		 	}
+		}
 	}
 }
