@@ -1,8 +1,12 @@
 
 //https://practice.geeksforgeeks.org/problems/design-bookmyshow
-How to implement seat booking process? How to handle the cases where two persons are trying to access the same seat almost same time?  Write class based solution asking about different functions that should be used to solve all the cases for booking procedure.
+/*
+ * How to implement seat booking process? How to handle the cases where two persons are trying to access the same seat almost same time?  Write class based solution asking about different functions that should be used to solve all the cases for booking procedure.
+ */
 
-Note: While answering design pattern questions, it is expected from you to provide the Data Structure that would be best suited, different classes & relationships between them, etc. You need not provide the whole code in your answer (unless explicitly told to do so). 
+/*
+ * Note: While answering design pattern questions, it is expected from you to provide the Data Structure that would be best suited, different classes & relationships between them, etc. You need not provide the whole code in your answer (unless explicitly told to do so). 
+ */
 
 package designPattern;
 
