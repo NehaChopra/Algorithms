@@ -6,13 +6,13 @@ class Node{
 	Node leftChild;
 	Node rightChild;
 	int height;
-	int desc;
+	int size;
 	Node(int data){
 		this.data = data;
 		this.leftChild = null;
 		this.rightChild = null;
 		this.height = 1;
-		this.desc = 0;
+		this.size = 0;
 	}
 }
 
@@ -25,15 +25,14 @@ class AVL{
 		}else{
 			if(root.data > data){
 				root.leftChild = insert(root.leftChild, data);
-				root.desc = root.desc + 1;
 			}else if(root.data < data){
 				root.rightChild = insert(root.rightChild, data);
-				root.desc = root.desc + 1;
 			}else{
 				return root;
 			}
 			
 			root.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
+			root.size = 1 + getSize(root.rightChild) + getSize(root.leftChild);
 			int balanceFactor = getHeight(root.leftChild) - getHeight(root.rightChild);
 			
 			if(balanceFactor > 1 && root.leftChild.data > data){
@@ -64,6 +63,12 @@ class AVL{
 		}
 		return root.height;
 	}
+	public static int getSize(Node root){
+		if(root==null){
+			return 0;
+		}
+		return root.size;
+	}
 	public static Node rotateLeft(Node root){
 		Node x = root.rightChild;
 		Node y = x.leftChild;
@@ -74,9 +79,9 @@ class AVL{
 		root.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		x.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		
-		int yDesc = ( y != null ) ? y.desc : -1;
-		root.desc = root.desc - (x.desc + 1) + (yDesc + 1);
-		x.desc = x.desc + (root.desc + 1) - (yDesc + 1);
+		int ysize = ( y != null ) ? y.size : 0;
+		root.size = root.size - (x.size + 1) - (ysize);
+		x.size = x.size + (root.size + 1) - (ysize);
 				
 		return x;
 		
@@ -91,9 +96,9 @@ class AVL{
 		root.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		x.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		
-		int yDesc = ( y != null ) ? y.desc : -1;
-		root.desc = root.desc - (x.desc + 1) + (yDesc + 1);
-		x.desc = x.desc + (root.desc + 1) - (yDesc + 1);
+		int ysize = ( y != null ) ? y.size : 0;
+		root.size = root.size - (x.size + 1) - (ysize);
+		x.size = x.size + (root.size + 1) - (ysize);
 			
 		return x;
 	}
@@ -116,13 +121,13 @@ class CountGreaterNodesinAVLtree {
 	public static void preOrderPrint(Node root){
 		if(root!=null){
 			preOrderPrint(root.leftChild);
-			System.out.println(root.data + "............. "+root.desc);
+			System.out.println(root.data + "............. "+root.size);
 			preOrderPrint(root.rightChild);
 		}
 	}
 	public static int findLargestTheNode(int data, Node root, int count){
 		if(root.data == data){
-			return root.desc;
+			return root.size;
 		}else if(root.data < data){
 			findLargestTheNode(data, root.rightChild, count);
 		}else if(root.data > data){
@@ -132,7 +137,7 @@ class CountGreaterNodesinAVLtree {
 	}
 	public static int countLargerElements(Node root, int key){
 		if(root.data == key){
-			return root.desc;
+			return root.size;
 		}else if(root.data > key){
 			return countLargerElements(root.leftChild, key);
 		}else{
