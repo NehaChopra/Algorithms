@@ -47,6 +47,7 @@ class Graph {
 }
 class BreadthFirstSearch {
 	public static void main(String args[]) {
+		
 		Graph obj = new Graph(4);
 		obj.addEdge(0, 1);
 		obj.addEdge(0, 2);
