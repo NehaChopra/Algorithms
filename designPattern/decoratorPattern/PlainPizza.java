@@ -11,5 +11,4 @@ public class PlainPizza implements Pizza{
 	public double getCost() {
 		return 10.00;
 	}
-
 }
