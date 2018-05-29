@@ -13,7 +13,7 @@ class XTotalShapes {
 			int[][] array = new int[rowLength][colLength];
 			for(int index=0; index<rowLength; index++){
 				for(int jindex=0; jindex<colLength; jindex++){
-					String ele = input.next();
+					String ele = input.next();input.
 					if(ele.equals("O")) {
 						array[index][jindex] = 0;
 					}
