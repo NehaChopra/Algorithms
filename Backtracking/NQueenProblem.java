@@ -7,6 +7,7 @@ import java.util.Stack;
 class NQueenProblem {
 	public static int num;
 	public static int rowTrip = 0;
+	public static int lastCol = 0;
 	public static void main(String []args){
 		Scanner input = new Scanner(System.in);
 		int testCases = input.nextInt();
@@ -16,9 +17,9 @@ class NQueenProblem {
 		}
 	}
 	public static void nQueenProblem(){
-		boolean[][] board = new boolean[num][num];
 		Stack<Integer> stack = new Stack<Integer>();
-		if(DFSUtil(0, rowTrip, board, stack)){
+		boolean[][] board = new boolean[num][num];
+		if(DFSUtil(0, 0, board, stack)){
 			printBoard(board,stack);
 			System.out.println();
 		}
@@ -30,11 +31,20 @@ class NQueenProblem {
 		}
 		System.out.print("]");
 	}
+	public static void printSolution(boolean[][] board){
+		for(int index=0; index<num;index++) {
+			for(int jindex=0; jindex<num;jindex++) {
+				System.out.print(board[index][jindex] + "       ");
+			}
+			System.out.println();
+		}
+	}
 	public static boolean DFSUtil(int col, int rowTrip, boolean[][] board, Stack<Integer> stack){
 		if(col>=num){
+			printSolution(board);
 			return true;
 		}
-		for(int rowIndex=0; rowIndex<num; rowIndex++){
+		for(int rowIndex=0; rowIndex<num; rowIndex++){	
 			if(isSafe(rowIndex, col, board)){
 				board[rowIndex][col] = true;
 				stack.push(rowIndex + 1);

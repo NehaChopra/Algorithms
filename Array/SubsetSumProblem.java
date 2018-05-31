@@ -1,9 +1,10 @@
-//https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes/0
-package tree;
+//https://practice.geeksforgeeks.org/problems/subset-sum-problem/0
+package Array;
 
 import java.util.Scanner;
 
-class Connectnropeswithminimumcost {
+
+class SubsetSumProblem {
 	public static void main(String []args){
 		Scanner input = new Scanner(System.in);
 		int testCasesNumber = input.nextInt();
@@ -14,23 +15,36 @@ class Connectnropeswithminimumcost {
 				array[index] = input.nextInt();
 			}
 			
-			HeapSort2 obj = new HeapSort2();
-			int finalCost = 0;
-			for(int i=0; i<arrayLength-1; i++) {
-				obj.sort(array);
-				if(array[i] != -1) {
-					array[i+1] = array[i+1] + array[i]; 
-					finalCost = finalCost + array[i+1];
-					array[i] = -1;
+			HeapSort obj = new HeapSort();
+			obj.sort(array);
+			int visited[] = null;
+			for(int index=array.length-1; index>=0; index--) {
+				visited = new int[array.length];
+				findSubsetSum(array, array[index], 0, visited);
+			}
+			
+			
+			for(int index=array.length-1; index>=0; index--) {
+				if(visited[index] == 1) {
+					System.out.print(array[index] + " ");
 				}
 			}
-			System.out.println(finalCost);
+			System.out.println();
+			
+		}
+	}
+	public static void findSubsetSum(int[] inputArray, int sum, int index, int visited[]) {
+		if(sum == 0) {
+			return;
+		}
+		for(int jIndex=index; jIndex<inputArray.length; jIndex++) {
+			visited[jIndex] = 1;
+			findSubsetSum(inputArray, sum - inputArray[index], jIndex+1, visited);
+			visited[jIndex] = 0;
 		}
 	}
 }
-
-
-class HeapSort2{
+class HeapSort{
 	public void sort(int[] inputArray){
 		for(int iIndex=inputArray.length/2 - 1; iIndex>=0; iIndex--){
 			heapify(inputArray, inputArray.length, iIndex);
@@ -45,7 +59,7 @@ class HeapSort2{
 		int largest = index;
 		int left = getLeft(index);
 		int right = getRight(index);
-		if(left < end && inputArray[left] > inputArray[largest]){
+		if(left < end && inputArray[left] >= inputArray[largest]){
 			largest = left;
 		}
 		
