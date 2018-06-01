@@ -12,10 +12,10 @@ public class ATMMachine {
 	
 	
 	public ATMMachine() {
-		hasCard = new HasCardState();
-		noCard = new NoCardState();
-		hasCorrectPin = new HasCorrectPinState();
-		outOfMoney = new OutOfMoneyState();
+		hasCard = new HasCardState(this);
+		noCard = new NoCardState(this);
+		hasCorrectPin = new HasCorrectPinState(this);
+		outOfMoney = new OutOfMoneyState(this);
 		
 		
 		/*
@@ -23,7 +23,7 @@ public class ATMMachine {
 		 */
 		atmState = noCard;
 		
-		if(availableCashInMachine < 0) {
+		if(availableCashInMachine <= 0) {
 			atmState = outOfMoney;
 		}
 	}
@@ -46,11 +46,11 @@ public class ATMMachine {
 	public void ejectCard() {
 		atmState.ejectCard();
 	}
-	public void insertATMPin() {
-		atmState.insertPin();
+	public void insertATMPin(int pinCode) {
+		atmState.insertPin(pinCode);
 	}
-	public void requestForCash() {
-		atmState.requestCash();
+	public void requestForCash(int withdrawCash) {
+		atmState.requestCash(withdrawCash);
 	}
 	
 	public ATMState hasCardState() {

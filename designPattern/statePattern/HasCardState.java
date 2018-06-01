@@ -9,7 +9,6 @@ public class HasCardState implements ATMState{
 	@Override
 	public void insertCard() {
 		System.out.println("Card is inserted into the machine !!");
-		atmMachine.setAtmState(atmMachine.hasCardState());
 	}
 
 	@Override
@@ -32,7 +31,6 @@ public class HasCardState implements ATMState{
 
 	@Override
 	public void requestCash(int withdrawCash) {
-		System.out.println("Request for a cash from the machine !!");
-		atmMachine.setAtmState(atmMachine.hasNoCardState());
+		System.out.println("Need to enter the pin code!!");
 	}
 }

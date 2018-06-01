@@ -9,7 +9,6 @@ public class HasCorrectPinState implements ATMState{
 	@Override
 	public void insertCard() {
 		System.out.println("Card is inserted into the machine !!");
-		atmMachine.setAtmState(atmMachine.hasCardState());
 	}
 
 	@Override
@@ -21,18 +20,18 @@ public class HasCorrectPinState implements ATMState{
 	@Override
 	public void insertPin(int pin) {
 		System.out.println("Pin is inserted into the machine !!");
-		if(pin == 123) {
-			System.out.println("Correct Pin is inserted into the machine !!");
-			atmMachine.setAtmState(atmMachine.hasCorrectPinState());
-		}else {
-			System.out.println("Incorrrect Pin is inserted into the machine !!");
-			atmMachine.setAtmState(atmMachine.hasNoCardState());
-		}
 	}
 
 	@Override
 	public void requestCash(int withdrawCash) {
 		System.out.println("Request for a cash from the machine !!");
-		atmMachine.setAtmState(atmMachine.hasNoCardState());
+		if(withdrawCash > atmMachine.availableCashInMachine) {
+			System.out.println("Not a sufficient cash in the machine !!");
+			atmMachine.setAtmState(atmMachine.hasNoCardState());
+		}else {
+			System.out.println("Requesting for a cash from the machine !!");
+			atmMachine.setCashInMachine(atmMachine.availableCashInMachine - withdrawCash);
+			atmMachine.setAtmState(atmMachine.hasNoCardState());
+		}
 	}
 }
