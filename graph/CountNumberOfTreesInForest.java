@@ -1,14 +1,14 @@
-//https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
+//https://www.geeksforgeeks.org/count-number-trees-forest/
 package graph;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class GraphDFS {
+class GraphDFSTree {
 	int vert;
 	LinkedList<Integer> adj[] = null;
 	
-	public GraphDFS(int vert){
+	public GraphDFSTree(int vert){
 		this.vert = vert;
 		adj = new LinkedList[vert];
 		for(int index=0; index< vert; index++) {
@@ -40,52 +40,28 @@ class GraphDFS {
 		
 	}
 	
-	public int findMotherIndex() {
+	public int countTrees() {
 		boolean visited[] = new boolean[vert];
 		LinkedList<Integer> queue = new LinkedList<Integer>();
-		/*
-		 * find last index 
-		 */
-		int lastIndex =0 ;
+		int finalTreeCount = 0;
 		for(int index=0; index<vert; index++) {
 			if(!visited[index]) {
 				queue.push(index);
 				DFS(visited, queue);
-				lastIndex = index;
+				finalTreeCount++;
 			}
 		}
-		
-		/*
-		 * Whether from the last index all node are visited
-		 * If visisted then that is the mother index of the graph
-		 */
-		boolean visited1[] = new boolean[vert];
-		queue.push(lastIndex);
-		DFS(visited1, queue);
-		
-		for(int index=0; index<vert; index++) {
-			if(!visited1[index]) {
-				lastIndex = -1;
-			}
-		}
-		return lastIndex;
+		return finalTreeCount;
 	}
 }
-class DepthFirstSearch {
-	public static void main(String args[]) {
-		
-		GraphDFS obj = new GraphDFS(7);
+class CountNumberOfTreesInForest {
+
+	public static void main(String[] args) {
+		GraphDFSTree obj = new GraphDFSTree(5);
 		obj.addEdge(0, 1);
 		obj.addEdge(0, 2);
-		obj.addEdge(1, 3);
-		obj.addEdge(4, 1);
-		obj.addEdge(6, 4);
-		obj.addEdge(5, 6);
-		obj.addEdge(5, 2);
-		obj.addEdge(6, 0);
+		obj.addEdge(3, 4);
 		
-		System.out.println(obj.findMotherIndex());
+		System.out.println(obj.countTrees());
 	}
 }
-
-
