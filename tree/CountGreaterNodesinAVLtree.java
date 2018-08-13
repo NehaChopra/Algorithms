@@ -1,13 +1,13 @@
 //https://www.geeksforgeeks.org/count-greater-nodes-in-avl-tree/
 package tree;
 
-class Node{
+class NodeAVL{
 	int data;
-	Node leftChild;
-	Node rightChild;
+	NodeAVL leftChild;
+	NodeAVL rightChild;
 	int height;
 	int size;
-	Node(int data){
+	NodeAVL(int data){
 		this.data = data;
 		this.leftChild = null;
 		this.rightChild = null;
@@ -16,11 +16,11 @@ class Node{
 	}
 }
 
-class AVL{
-	Node root;
-	public static Node insert(Node root, int data){
+class AVLGreater{
+	NodeAVL root;
+	public static NodeAVL insert(NodeAVL root, int data){
 		if(root == null){
-			Node node = new Node(data);
+			NodeAVL node = new NodeAVL(data);
 			return node;
 		}else{
 			if(root.data > data){
@@ -57,21 +57,21 @@ class AVL{
 		}
 		return root;
 	}
-	public static int getHeight(Node root){
+	public static int getHeight(NodeAVL root){
 		if(root==null){
 			return 0;
 		}
 		return root.height;
 	}
-	public static int getSize(Node root){
+	public static int getSize(NodeAVL root){
 		if(root==null){
 			return 0;
 		}
 		return root.size;
 	}
-	public static Node rotateLeft(Node root){
-		Node x = root.rightChild;
-		Node y = x.leftChild;
+	public static NodeAVL rotateLeft(NodeAVL root){
+		NodeAVL x = root.rightChild;
+		NodeAVL y = x.leftChild;
 		
 		root.rightChild = y;
 		x.leftChild = root;
@@ -79,16 +79,12 @@ class AVL{
 		root.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		x.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		
-		int ysize = ( y != null ) ? y.size : 0;
-		root.size = root.size - (x.size + 1) - (ysize);
-		x.size = x.size + (root.size + 1) - (ysize);
-				
 		return x;
 		
 	}
-	public static Node rotateRight(Node root){
-		Node x = root.leftChild;
-		Node y = x.rightChild;
+	public static NodeAVL rotateRight(NodeAVL root){
+		NodeAVL x = root.leftChild;
+		NodeAVL y = x.rightChild;
 		
 		root.leftChild = y;
 		x.rightChild = root;
@@ -96,16 +92,13 @@ class AVL{
 		root.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		x.height = 1 + Math.max(getHeight(root.rightChild), getHeight(root.leftChild));
 		
-		int ysize = ( y != null ) ? y.size : 0;
-		root.size = root.size - (x.size + 1) - (ysize);
-		x.size = x.size + (root.size + 1) - (ysize);
 			
 		return x;
 	}
 }
 class CountGreaterNodesinAVLtree {
 	public static void main(String args[]){
-		AVL obj = new AVL();
+		AVLGreater obj = new AVLGreater();
 		obj.root = obj.insert(obj.root, 9);
 		obj.root = obj.insert(obj.root, 5);
 		obj.root = obj.insert(obj.root, 10);
@@ -118,30 +111,16 @@ class CountGreaterNodesinAVLtree {
 		
 		preOrderPrint(obj.root);
 	}
-	public static void preOrderPrint(Node root){
+	public static void preOrderPrint(NodeAVL root){
 		if(root!=null){
 			preOrderPrint(root.leftChild);
-			System.out.println(root.data + "............. "+root.size);
+			System.out.println(root.data + "............. "+root.height);
 			preOrderPrint(root.rightChild);
 		}
 	}
-	public static int findLargestTheNode(int data, Node root, int count){
-		if(root.data == data){
-			return root.size;
-		}else if(root.data < data){
-			findLargestTheNode(data, root.rightChild, count);
-		}else if(root.data > data){
-			findLargestTheNode(data, root.leftChild, count);
-		}
-		return 0;
-	}
-	public static int countLargerElements(Node root, int key){
-		if(root.data == key){
-			return root.size;
-		}else if(root.data > key){
-			return countLargerElements(root.leftChild, key);
-		}else{
-			return countLargerElements(root.rightChild, key);
-		}
-	}
+//	public static int findLargestTheNode(int data, NodeAVL root, int count){
+//		
+//	}
+//	public static int countLargerElements(NodeAVL root, int key){
+//	}
 }
