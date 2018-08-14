@@ -15,32 +15,12 @@ class WordBreakProblem {
 		for(int index=0; index<dictionary.length; index++) {
 			obj.insert(dictionary[index]);
 		}
-
-		System.out.println(wordBreak("ilikesamsung", obj));
-//		wordBreak("ilikesamsung", root)? cout <<"Yes\n": cout << "No\n";
-//	    wordBreak("iiiiiiii", root)? cout <<"Yes\n": cout << "No\n";
-//	    wordBreak("", root)? cout <<"Yes\n": cout << "No\n";
-//	    wordBreak("ilikelikeimangoiii", root)? cout <<"Yes\n": cout << "No\n";
-//	    wordBreak("samsungandmango", root)? cout <<"Yes\n": cout << "No\n";
-//	    wordBreak("samsungandmangok", root)? cout <<"Yes\n": cout << "No\n";
 	    
-	    
-	}
-	public static boolean wordBreak(String key, TrieTest obj) {
-		boolean result = true;
-		
-		StringBuffer str = new StringBuffer();
-		for(int index=0; index<key.length(); index++) {
-			str.append(key.charAt(index));
-			if(obj.search(str.toString())) {
-				System.out.print(str.toString() + " ");
-				str.setLength(0);
-			}else {
-//				str.append(key.charAt(index));
-			}
-		}
-		
-		return result;
+//		String input = "ilike";
+//		String input = "ilikesamsung";
+//		String input = "samsungandmango";
+		String input = "samsungandmangok";
+		System.out.println(obj.search(input));
 	}
 }
 
@@ -69,6 +49,9 @@ class TrieTest{
 		cwral.endOfWord = true;
 	}
 	public boolean search(String key){
+		if(key.equals("")) {
+			return true;
+		}
 		TrieNodeTest cwral = root;
 		for(int index=0; index<key.length();index++){
 			int elementIndex = key.charAt(index) - 'a';
@@ -76,6 +59,9 @@ class TrieTest{
 				return false;
 			}
 			cwral = cwral.children[elementIndex];
+			if(cwral!=null && cwral.endOfWord) {
+				return search(key.substring(index+1, key.length()));
+			}
 		}
 		return (cwral!=null && cwral.endOfWord);
 	}
