@@ -1,5 +1,0 @@
-package designPattern;
-
-class URLShortener {
-
-}
