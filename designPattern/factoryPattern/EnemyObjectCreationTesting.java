@@ -18,6 +18,16 @@ import java.util.Scanner;
  * identifying common communication patterns between objects 
  * Behavioral patterns are Chain of responsibility, Command, Interpreter, Iterator, Mediator, Memento, Null Object, Observer, State, Strategy, Template method, Visitor
  * 
+ * 
+ * Real world examples:
+ * 1. java.util.Calendar --- public static Calendar getInstance(), public static Calendar getInstance(TimeZone zone), public static Calendar getInstance(Locale aLocale), public static Calendar getInstance(TimeZone zone,
+                                   Locale aLocale)
+                                   
+ * 2. java.text.NumberFormat ----- public static final NumberFormat getInstance(), ublic static NumberFormat getInstance(Locale inLocale), 
+ * public static final NumberFormat getNumberInstance(),  public static final NumberFormat getIntegerInstance(), 
+ * public static final NumberFormat getCurrencyInstance(), public static NumberFormat getPercentInstance(Locale inLocale)
+ * 
+ * 
  */
 class EnemyObjectCreationTesting {
 	public static void main(String []args){
