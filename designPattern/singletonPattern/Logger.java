@@ -1,5 +1,16 @@
 package designPattern.singletonPattern;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 /*
  * Singleton pattern restricts the instantiation of a class and ensures that only one instance of the class exists in the java virtual machine.
 The singleton class must provide a global access point to get the instance of the class.
@@ -132,6 +143,7 @@ any additional synchronization overhead.
 
 6. Using Reflection to destroy Singleton Pattern
 
+
 7. Enum Singleton
 
 8. Serialization and Singleton
@@ -149,4 +161,56 @@ public class Logger {
 	public static Instance getInstance() {
 		return Instance.INSTANCE;
 	}
+	/*
+	 * 1. Thread safe
+	 * 2. Resources safe
+	 * 3. lazy loading
+	 * 4. Reflection safe
+	 * 5. class final static object cannot be clone
+	 */
+	
+	protected Object readResolve() {
+	    return getInstance();
+	}
+	/*
+	 * Java serialization: readObject() vs. readResolve()
+	 * readResolve is used for replacing the object read from the stream. The only use I've ever seen for this is enforcing singletons; 
+	 * when an object is read, replace it with the singleton instance. This ensures that nobody can create another instance by serializing
+	 *  and deserializing the singleton.
+	 */
+	/*
+	 * 5. Serialization safe
+	 */
+	public static void main(String []args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, FileNotFoundException, IOException, ClassNotFoundException {
+		
+		Instance instanceOne = Logger.getInstance();
+		Instance instanceTwo = null;
+		for(Constructor constructor : Logger.Instance.class.getDeclaredConstructors()) {
+			constructor.setAccessible(true);
+			instanceTwo = (Instance) constructor.newInstance();
+			break;
+		}
+		
+		System.out.println(instanceOne.hashCode());
+		System.out.println(instanceOne.hashCode());
+		
+		
+		Instance firstOne = Logger.getInstance();
+		ObjectOutput out = new ObjectOutputStream(new FileOutputStream("test.ser"));
+		out.writeObject(firstOne);
+		out.flush();
+		out.close();
+		
+		
+		ObjectInput input = new ObjectInputStream(new FileInputStream("test.ser"));
+		Instance secondOne = (Instance)input.readObject();
+		input.close();
+		
+		
+		System.out.println(firstOne.hashCode());
+		System.out.println(secondOne.hashCode());
+		
+	}
 }
+
+
