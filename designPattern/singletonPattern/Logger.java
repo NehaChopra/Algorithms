@@ -8,6 +8,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -150,7 +151,7 @@ any additional synchronization overhead.
 
 
  */
-public class Logger {
+public class Logger implements Serializable{
 	
 	private Logger() {};
 	
@@ -203,7 +204,7 @@ public class Logger {
 		
 		
 		ObjectInput input = new ObjectInputStream(new FileInputStream("test.ser"));
-		Instance secondOne = (Instance)input.readObject();
+		Instance secondOne = (Logger.Instance)input.readObject();
 		input.close();
 		
 		
